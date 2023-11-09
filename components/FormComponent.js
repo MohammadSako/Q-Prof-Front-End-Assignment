@@ -1,33 +1,27 @@
-// import { DatePicker } from "@mui/x-date-pickers";
 import useInput from "../components/layouts/use-input";
-// import DatePickers from "@/UI/DatePickers";
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { dataActions } from "../store/data-slice";
 import { useRouter } from "next/router";
+import { getFormattedDate } from "../util/date";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-// import TimePicker from "react-time-picker";
-import { getFormattedDate } from "../util/date";
 
 export default function FormComponent() {
   const dispatch = useDispatch();
   const router = useRouter();
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  // const [value, onChange] = useState("10:00");
 
- const startedDate = getFormattedDate(startDate);
- const endedDate = getFormattedDate(endDate);
+  const startedDate = getFormattedDate(startDate);
+  const endedDate = getFormattedDate(endDate);
 
   const titleInputRef = useRef();
   const subtitleInputRef = useRef();
   const descriptionInputRef = useRef();
-  const startDateInputRef = useRef();
-  const dueDateInputRef = useRef();
   const durationInHoursInputRef = useRef();
-  // const timeSpentInputRef = useRef();
   const assignedToInputRef = useRef();
+  const timeSpentInputRef = useRef();
 
   const {
     value: enteredTitle,
@@ -54,22 +48,6 @@ export default function FormComponent() {
     reset: resetDescriptionInput,
   } = useInput((value) => value.trim() !== "");
   const {
-    value: enteredStartDate,
-    isValid: enteredStartDateValid,
-    hasError: startDateInputHasError,
-    valueChangeHandler: startDateChangeHandler,
-    inputBlurHandler: startDateBlurHandler,
-    reset: resetStartDateInput,
-  } = useInput((value) => value.trim() !== "");
-  const {
-    value: enteredDueDate,
-    isValid: enteredDueDateValid,
-    hasError: dueDateInputHasError,
-    valueChangeHandler: dueDateChangeHandler,
-    inputBlurHandler: dueDateBlurHandler,
-    reset: resetDueDateInput,
-  } = useInput((value) => value.trim() !== "");
-  const {
     value: enteredDurationInHours,
     isValid: enteredDurationInHoursValid,
     hasError: durationInHoursInputHasError,
@@ -77,14 +55,6 @@ export default function FormComponent() {
     inputBlurHandler: durationInHoursBlurHandler,
     reset: resetDurationInHoursInput,
   } = useInput((value) => value.trim() !== "");
-  // const {
-  //   value: enteredTimeSpent,
-  //   isValid: enteredTimeSpentValid,
-  //   hasError: timeSpentInputHasError,
-  //   valueChangeHandler: timeSpentChangeHandler,
-  //   inputBlurHandler: timeSpentBlurHandler,
-  //   reset: resetTimeSpentInput,
-  // } = useInput((value) => value.trim() !== "");
   const {
     value: enteredAssignedTo,
     isValid: enteredAssignedToValid,
@@ -93,6 +63,14 @@ export default function FormComponent() {
     inputBlurHandler: assignedToBlurHandler,
     reset: resetAssignedToInput,
   } = useInput((value) => value.trim() !== "");
+  const {
+    value: enteredTimeSpent,
+    isValid: enteredTimeSpentValid,
+    hasError: timeSpentInputHasError,
+    valueChangeHandler: timeSpentChangeHandler,
+    inputBlurHandler: timeSpentBlurHandler,
+    reset: resetTimeSpentInput,
+  } = useInput((value) => value.trim() !== "");
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -100,12 +78,10 @@ export default function FormComponent() {
     if (
       !enteredTitleIsValid &&
       !enteredSubtitlesValid &&
-      !enteredStartDateValid &&
-      !enteredDueDateValid &&
       !enteredDescriptionValid &&
       !enteredDurationInHoursValid &&
-      // !enteredTimeSpentValid &&
-      !enteredAssignedToValid
+      !enteredAssignedToValid &&
+      !enteredTimeSpentValid
     ) {
       return;
     }
@@ -116,7 +92,7 @@ export default function FormComponent() {
     const enteredStartDate = startedDate;
     const enteredDueDate = endedDate;
     const enteredDurationInHours = durationInHoursInputRef.current.value;
-    // const enteredTimeSpent = timeSpentInputRef.current.value;
+    const enteredTimeSpent = timeSpentInputRef.current.value;
     const enteredAssignedTo = assignedToInputRef.current.value;
 
     const Data = {
@@ -126,15 +102,12 @@ export default function FormComponent() {
       startDate: enteredStartDate,
       dueDate: enteredDueDate,
       durationInHours: enteredDurationInHours,
-      // timeSpent: enteredTimeSpent,
+      timeSpent: enteredTimeSpent,
       assignedTo: enteredAssignedTo,
       id: new Date().toString + Math.random().toString(),
     };
     dispatch(dataActions.formData(Data));
     router.push("/user");
-
-    // props.onAddData(Data);
-    // resetTitleInput;
   };
 
   return (
@@ -168,11 +141,12 @@ export default function FormComponent() {
                   style={{
                     backgroundColor: "rgb(255 0 0)",
                     borderRadius: "5px",
-                    padding: "1px",
+                    padding: "7px",
+                    marginTop: "3px",
                     color: "white",
                   }}
                 >
-                  Error!!!!!!!!!
+                  Enter a valid Title
                 </p>
               )}
             </div>
@@ -203,11 +177,12 @@ export default function FormComponent() {
                   style={{
                     backgroundColor: "rgb(255 0 0)",
                     borderRadius: "5px",
-                    padding: "1px",
+                    padding: "7px",
+                    marginTop: "3px",
                     color: "white",
                   }}
                 >
-                  Error!!!!!!!!!
+                  Enter a valid subtitle
                 </p>
               )}
             </div>
@@ -241,11 +216,12 @@ export default function FormComponent() {
                   style={{
                     backgroundColor: "rgb(255 0 0)",
                     borderRadius: "5px",
-                    padding: "1px",
+                    padding: "7px",
+                    marginTop: "3px",
                     color: "white",
                   }}
                 >
-                  Error!!!!!!!!!
+                  Enter a valid description
                 </p>
               )}
             </div>
@@ -266,24 +242,8 @@ export default function FormComponent() {
                   startDate={startDate}
                   endDate={endDate}
                   onChange={(date) => setStartDate(date)}
-                  ref={startDateInputRef}
-                  // onBlur={startDateBlurHandler}
-                  // value={enteredStartDate}
                 />
               </div>
-              {startDateInputHasError && (
-                <p
-                  className="error-text"
-                  style={{
-                    backgroundColor: "rgb(255 0 0)",
-                    borderRadius: "5px",
-                    padding: "1px",
-                    color: "white",
-                  }}
-                >
-                  Error!!!!!!!!!
-                </p>
-              )}
             </div>
 
             <div className="sm:col-span-3">
@@ -293,7 +253,7 @@ export default function FormComponent() {
               >
                 Due Date
               </label>
-              <div className="mt-2 p-1 rounded border   border-gray-300">
+              <div className="mt-2 p-1 rounded border border-gray-300">
                 <DatePicker
                   selected={endDate}
                   onChange={(date) => setEndDate(date)}
@@ -301,28 +261,12 @@ export default function FormComponent() {
                   startDate={startDate}
                   endDate={endDate}
                   minDate={startDate}
-                  ref={dueDateInputRef}
-                  // onBlur={dueDateBlurHandler}
-                  // value={enteredDueDate}
                 />
               </div>
-              {dueDateInputHasError && (
-                <p
-                  className="error-text"
-                  style={{
-                    backgroundColor: "rgb(255 0 0)",
-                    borderRadius: "5px",
-                    padding: "1px",
-                    color: "white",
-                  }}
-                >
-                  Error!!!!!!!!!
-                </p>
-              )}
             </div>
           </div>
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div className="sm:col-span-2">
+            <div className="sm:col-span-1">
               <label
                 htmlFor="first-name"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -348,15 +292,16 @@ export default function FormComponent() {
                   style={{
                     backgroundColor: "rgb(255 0 0)",
                     borderRadius: "5px",
-                    padding: "1px",
+                    padding: "7px",
+                    marginTop: "3px",
                     color: "white",
                   }}
                 >
-                  Error!!!!!!!!!
+                  Enter a valid number
                 </p>
               )}
             </div>
-            {/* <div className="sm:col-span-2">
+            <div className="sm:col-span-1">
               <label
                 htmlFor="first-name"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -364,7 +309,17 @@ export default function FormComponent() {
                 Time Spent
               </label>
               <div className="mt-2">
-                <TimePicker onChange={onChange} value={value} />
+                <input
+                  type="text"
+                  name="first-name"
+                  id="first-name"
+                  autoComplete="given-name"
+                  className="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onChange={timeSpentChangeHandler}
+                  ref={timeSpentInputRef}
+                  onBlur={timeSpentBlurHandler}
+                  value={enteredTimeSpent}
+                />
               </div>
               {timeSpentInputHasError && (
                 <p
@@ -372,15 +327,17 @@ export default function FormComponent() {
                   style={{
                     backgroundColor: "rgb(255 0 0)",
                     borderRadius: "5px",
-                    padding: "1px",
+                    padding: "7px",
+                    marginTop: "3px",
                     color: "white",
                   }}
                 >
-                  Error!!!!!!!!!
+                  Enter a valid number
                 </p>
               )}
-            </div> */}
-            <div className="sm:col-span-2">
+            </div>
+
+            <div className="sm:col-span-1">
               <label
                 htmlFor="team"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -407,7 +364,7 @@ export default function FormComponent() {
           </div>
         </div>
       </div>
-      <div className="border-b border-gray-900/10 pb-12">
+      <div className="border-b border-gray-900/10 pb-12 mt-5">
         <h2 className="text-base font-semibold leading-7 text-gray-900">
           Profile
         </h2>
@@ -416,12 +373,12 @@ export default function FormComponent() {
           share.
         </p>
       </div>
-      <div className="mt-6 flex items-center justify-end gap-x-6">
+      <div className="mt-5 flex items-center justify-end gap-x-6">
         <button
           type="submit"
           className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-          Save
+          Submit
         </button>
       </div>
     </form>

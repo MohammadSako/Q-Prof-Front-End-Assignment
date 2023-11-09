@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 const Users = () => {
   const newData = useSelector((state) => state.data.theData);
   const router = useRouter();
-console.log(newData);
+
   useEffect(() => {
     if (newData.length === 0) {
       router.push("/form");
