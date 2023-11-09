@@ -14,7 +14,7 @@ export default function UsersComponent(props) {
   return (
     <ul
       role="list"
-      className="mt-10 divide-y divide-gray-100 border-b border-gray-900/10 pb-1 drop-shadow-md"
+      className="mt-7 divide-y divide-gray-100 border-b border-gray-900/10 pb-1 drop-shadow-md"
     >
       <li key={id} className="flex justify-between gap-x-6 py-5">
         <div className="flex min-w-0 gap-x-6">
