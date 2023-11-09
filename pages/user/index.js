@@ -1,9 +1,18 @@
 import UsersComponent from "@/components/UsersComponent";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const Users = () => {
   const newData = useSelector((state) => state.data.theData);
-  console.log(newData);
+  const router = useRouter();
+console.log(newData);
+  useEffect(() => {
+    if (newData.length === 0) {
+      router.push("/form");
+    }
+  }, [newData, router]);
+
   return (
     <div className="container mx-auto">
       {newData.map((data) => (
@@ -22,7 +31,6 @@ const Users = () => {
           }}
         />
       ))}
-      {/* <UsersComponent data={newData} /> */}
     </div>
   );
 };
