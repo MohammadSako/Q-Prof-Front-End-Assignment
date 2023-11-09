@@ -7,11 +7,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <Navigation />
       <div className="flex ...">
-        <div className="flex-none w-14 h-14 ..."></div>
+        <div className="flex-none w-5 h-5 ..."></div>
         <div className="grow h-14 ...">
           <main>{children}</main>
         </div>
-        <div className="flex-none w-14 h-14 ..."></div>
+        <div className="flex-none w-5 h-5 ..."></div>
       </div>
     </>
   );

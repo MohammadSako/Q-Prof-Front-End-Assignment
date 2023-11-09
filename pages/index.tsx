@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import FormComponent from "../components/FormComponent";
 import Head from "next/head";
 import Form from "./form";
 
