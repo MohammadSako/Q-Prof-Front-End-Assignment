@@ -112,6 +112,7 @@ export default function FormComponent() {
 
   return (
     <form onSubmit={submitHandler}>
+    
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -131,6 +132,7 @@ export default function FormComponent() {
                   ref={titleInputRef}
                   onBlur={titleBlurHandler}
                   value={enteredTitle}
+                  minLength={3}
                   autoComplete="given-name"
                   className="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -205,6 +207,7 @@ export default function FormComponent() {
                   ref={descriptionInputRef}
                   onBlur={descriptionBlurHandler}
                   value={enteredDescription}
+                  maxLength={150}
                 />
               </div>
               <p className="mt-3 text-sm leading-6 text-gray-600">
@@ -275,9 +278,11 @@ export default function FormComponent() {
               </label>
               <div className="mt-2">
                 <input
-                  type="text"
+                  type="number"
                   name="first-name"
                   id="first-name"
+                  min={1}
+                  max={30}
                   autoComplete="given-name"
                   className="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   onChange={durationInHoursChangeHandler}
@@ -310,7 +315,8 @@ export default function FormComponent() {
               </label>
               <div className="mt-2">
                 <input
-                  type="text"
+                  type="number"
+                  min={1}
                   name="first-name"
                   id="first-name"
                   autoComplete="given-name"
@@ -355,11 +361,26 @@ export default function FormComponent() {
                   onBlur={assignedToBlurHandler}
                   value={enteredAssignedTo}
                 >
+                  <option></option>
                   <option>Team 1</option>
                   <option>Team 2</option>
                   <option>Team 3</option>
                 </select>
               </div>
+              {assignedToInputHasError && (
+                <p
+                  className="error-text"
+                  style={{
+                    backgroundColor: "rgb(255 0 0)",
+                    borderRadius: "5px",
+                    padding: "7px",
+                    marginTop: "3px",
+                    color: "white",
+                  }}
+                >
+                  Select a team that assigned the task to.
+                </p>
+              )}
             </div>
           </div>
         </div>
