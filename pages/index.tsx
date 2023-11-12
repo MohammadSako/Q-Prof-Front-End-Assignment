@@ -9,7 +9,7 @@ export default function Home() {
         <title>Mohammad Murad Q-professionals Test</title>
         <meta name="Mohammad Murad" content="Q-professionals Test" />
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <main className="flex min-h-screen flex-col items-center justify-between">
         <Form />
       </main>
     </Fragment>
