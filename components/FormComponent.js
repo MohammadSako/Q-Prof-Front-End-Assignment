@@ -114,10 +114,10 @@ export default function FormComponent() {
     <div className="pt-6">
       <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-5xl lg:grid-cols-2 lg:gap-x-8 lg:px-8 ">
         <div
-          className="aspect-h-4 aspect-w-3 hidden overflow-hidden lg:block"
+          className="aspect-h-4 aspect-w-3 lg:block"
           style={{ backgroundColor: "#2bbab3" }}
         >
-          <div style={{ color: "white", marginTop: 200, padding: 40 }}>
+          <div style={{ color: "white", marginTop: 150, padding: 40 }}>
             <h1 style={{ fontSize: 24, textAlign: "center", marginBottom: 10 }}>
               Create Task
             </h1>
