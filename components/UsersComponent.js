@@ -12,59 +12,67 @@ export default function UsersComponent(props) {
   } = props.data;
 
   return (
-    <ul
-      role="list"
-      className="mt-7 divide-y divide-gray-100 border-b border-gray-900/10 pb-1 drop-shadow-md"
-    >
-      <li key={id} className="flex justify-between gap-x-6 py-5">
-        <div className="flex min-w-0 gap-x-6">
-          <div className="min-w-0 flex-auto">
-            <p className="text-lg font-semibold leading-8 text-gray-900">
-              <span className="text-3xl leading-6 text-gray-900">{title}</span>
-            </p>
-            <p className="text-lg font-semibold leading-6 text-gray-900">
-              <span className="text-xl leading-6 text-gray-500">
-                {subtitle}
-              </span>
-            </p>
-            <p className="mt-1 text-lg font-semibold leading-6 text-gray-900">
-              Assigned to:
-              <span className="text-lg leading-6 text-gray-500">
-                {" "}
-                {assignedTo}
-              </span>
-            </p>
-            <p className="mt-1 text-lg font-semibold leading-6 text-gray-900">
-              Description:
-              <span className="text-lg leading-6 text-gray-500">
-                {" "}
-                {description}
-              </span>
-            </p>
+    <div className="mt-10 lg:mx-auto shadow-2xl p-8">
+      <div className="px-4 sm:px-0">
+        <h1 className="text-base font-sembold  text-2xl leading-7 text-gray-900">
+          {title}
+        </h1>
+        <p className="mt-1 max-w-2xl text-sm text-xl leading-6 text-gray-500 ">
+          {subtitle}
+        </p>
+      </div>
+      <div className="mt-6 border-t border-gray-100">
+        <dl className="divide-y divide-gray-100">
+          <div className="px-3 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              Start Date
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {startDate}
+            </dd>
           </div>
-        </div>
-        <div className="shrink-0 sm:flex sm:flex-col sm:items-start">
-          <p className="text-lg font-semibold leading-6 text-gray-900">
-            Duration in Hours:{" "}
-            <span className="text-lg leading-6 text-gray-500">
-              {durationInHours}
-            </span>
-          </p>
-
-          <p className="text-lg font-semibold leading-6 text-gray-900">
-            Start Date:{" "}
-            <span className="text-lg leading-6 text-gray-500">{startDate}</span>
-          </p>
-          <p className="text-lg font-semibold leading-6 text-gray-900">
-            Due Date:{" "}
-            <span className="text-lg leading-6 text-gray-500">{dueDate}</span>
-          </p>
-          <p className="text-lg font-semibold leading-6 text-gray-900">
-            Time Spent:{" "}
-            <span className="text-lg leading-6 text-gray-500">{timeSpent}</span>
-          </p>
-        </div>
-      </li>
-    </ul>
+          <div className="px-3 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              Due Date
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {dueDate}
+            </dd>
+          </div>
+          <div className="px-3 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              Duration in Hours
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {durationInHours} Hr/s
+            </dd>
+          </div>
+          <div className="px-3 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              Time Spent
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {timeSpent}
+            </dd>
+          </div>
+          <div className="px-3 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              Description
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {description}
+            </dd>
+          </div>
+          <div className="px-3 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              Assigned To
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {assignedTo}
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
   );
 }
